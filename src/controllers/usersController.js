@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const bcrypt = require('bcrypt');
 const ConflictError = require('../errors/ConflictError');
 const User = require('../models/User');
