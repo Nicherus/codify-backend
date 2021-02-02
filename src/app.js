@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -13,6 +12,7 @@ app.use(express.json());
 
 app.use('/clients', clientsRouter);
 
+/* eslint-disable-next-line no-unused-vars */
 app.use((error, req, res, next) => {
   if (error instanceof ConflictError) return res.status(409).send({ error: 'Conflito de dados.' });
   return res.status(500).json(error);
