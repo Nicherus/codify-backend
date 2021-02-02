@@ -1,5 +1,6 @@
-/* eslint-disable no-undef */
+/* global jest, describe, it, expect */
 const usersController = require('../../src/controllers/usersController');
+const ConflictError = require('../../src/errors/ConflictError');
 const User = require('../../src/models/User');
 
 jest.mock('bcrypt', () => ({
@@ -28,6 +29,23 @@ describe('postSignup', () => {
     const user = await usersController.postSignup(body);
 
     expect(user).toBe(expectedObject);
+  });
+
+  it('should throw a conflict error', async () => {
+    const body = {
+      name: 'test',
+      email: 'test@test.com',
+      password: '123456',
+    };
+    const expectedObject = {
+      id: 1,
+      name: 'test',
+      email: 'test@test.com',
+      password: '123456',
+    };
+    jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => expectedObject);
+
+    expect(async () => usersController.postSignup(body)).rejects.toThrow(ConflictError);
   });
 });
 

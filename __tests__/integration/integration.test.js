@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* global jest, describe, it, expect, beforeAll, afterAll */
 const dotenv = require('dotenv');
 
 dotenv.config();
