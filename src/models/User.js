@@ -23,12 +23,6 @@ User.init(
       type: Sequelize.STRING(255),
       allowNull: false,
     },
-    createdAt: {
-      type: Sequelize.DATE,
-    },
-    updatedAt: {
-      type: Sequelize.DATE,
-    },
   },
   {
     sequelize,
