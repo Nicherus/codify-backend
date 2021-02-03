@@ -12,6 +12,25 @@
     },
     "rules": {
         "class-methods-use-this": "off",
+<<<<<<< HEAD
         "treatUndefinedAsUnspecified": false,
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "semi": [2, "always"]
+=======
+        "semi": [2, "always"],
+        "object-curly-spacing": ["error", "always"],
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
+        "padded-blocks": ["error", "never"],
+        "quotes": ["error", "single"],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "space-in-parens": ["error", "never"],
+        "eol-last": ["error", "always"]
+>>>>>>> main
+=======
+        "treatUndefinedAsUnspecified": false,
+>>>>>>> origin/login
+>>>>>>> ac13074d97b3b602a37f8bbabe593a4f4e55519e
     }
 }
