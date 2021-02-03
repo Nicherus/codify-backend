@@ -103,8 +103,6 @@ describe('POST /clients/signin', () => {
 });
 
 describe('POST /admin/signin', () => {
-
-
   it('should return 200 when passed valid login data', async () => {
 
     const bodyAdmin = {
