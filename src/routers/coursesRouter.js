@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   if (validation.error) return res.status(422).send({ error: 'Verifique seus dados' });
 
   const course = await coursesController.create(req.body.name);
-  return res.status(201).send(course);
+  res.status(201).send(course);
 });
 
 router.get('/', async (req, res) => {
