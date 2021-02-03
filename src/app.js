@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 require('express-async-errors');
 const clientsRouter = require('./routers/clientsRouter');
+const coursesRouter = require('./routers/coursesRouter');
 const ConflictError = require('./errors/ConflictError');
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/clients', clientsRouter);
+app.use('/courses', coursesRouter);
 
 /* eslint-disable-next-line no-unused-vars */
 app.use((error, req, res, next) => {
