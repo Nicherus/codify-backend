@@ -5,6 +5,7 @@ require('express-async-errors');
 const clientsRouter = require('./routers/clientsRouter');
 const coursesRouter = require('./routers/coursesRouter');
 const ConflictError = require('./errors/ConflictError');
+const InexistingId = require('./errors/InexistingId');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/courses', coursesRouter);
 /* eslint-disable-next-line no-unused-vars */
 app.use((error, req, res, next) => {
   if (error instanceof ConflictError) return res.status(409).send({ error: 'Conflito de dados.' });
+  if( error instanceof InexistingId) return res.status(403).send({error: 'Id does not exists'})
   return res.status(500).json(error);
 });
 
