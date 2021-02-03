@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { postCoursesSchema } = require('../schemas/coursesSchema');
-const coursesController = require('../controllers/coursesController');
+const { postCoursesSchema } = require('../../schemas/coursesSchema');
+const coursesController = require('../../controllers/coursesController');
 
 router.post('/', async (req, res) => {
   const validation = postCoursesSchema.validate(req.body);

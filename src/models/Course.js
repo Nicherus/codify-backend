@@ -19,6 +19,14 @@ Course.init({
     allowNull: false,
     defaultValue: false,
   },
+  image: {
+    type: Sequelize.STRING(10000),
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.STRING(10000),
+    allowNull: false,
+  }
 },
 {
   sequelize,
