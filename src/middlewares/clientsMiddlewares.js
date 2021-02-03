@@ -3,7 +3,6 @@ const signUpSchema = require('../schemas/signUpSchema');
 
 async function signUpMiddleware(req, res, next) {
   const signupValidation = signUpSchema.validate(req.body).error;
-
   if (signupValidation) {
     return res.status(422).send({
       error: signupValidation.message === 'Senhas diferentes.'
