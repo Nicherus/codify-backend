@@ -13,15 +13,15 @@ Topic.init(
     },
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     courseId: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
         model: 'courses',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
   },
   {
