@@ -1,8 +1,4 @@
 node_modules
 .env
 .eslintcache
-<<<<<<< HEAD
-.yarn
-=======
->>>>>>> origin/login
 coverage
