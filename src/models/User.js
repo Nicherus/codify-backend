@@ -23,6 +23,10 @@ User.init(
       type: Sequelize.STRING(255),
       allowNull: false,
     },
+    type: {
+      type: Sequelize.STRING(255),
+      allowNull: false,
+    },
   },
   {
     sequelize,
