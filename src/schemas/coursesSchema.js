@@ -5,5 +5,5 @@ const postCoursesSchema = joi.object({
 });
 
 module.exports = {
-    postCoursesSchema,
-}
+  postCoursesSchema,
+};
