@@ -7,6 +7,11 @@ class TopicsController {
     return topic;
   }
 
+  async createListOfTopics(topics, courseId) {
+    const arrayTopics = topics.map((t) => ({ name: t.name, courseId }));
+    await Topic.bulkCreate(arrayTopics);
+  }
+
   async getAllTopics() {
     const topics = await Topic.findAll();
     return topics;

@@ -2,6 +2,7 @@ const Course = require('../models/Course');
 const ConflictError = require('../errors/ConflictError');
 const InexistingId = require('../errors/InexistingId');
 const Topic = require('../models/Topic');
+const topicsController = require('./topicsController');
 
 class CoursesController {
   async findCourseByName(name) {
@@ -9,12 +10,17 @@ class CoursesController {
     return course;
   }
 
-  async create(name) {
+  async create({
+    name, image, description, topics,
+  }) {
     const coursesExists = await this.findCourseByName(name);
     if (coursesExists) throw new ConflictError();
 
-    const course = await Course.create({ name });
-    return course;
+    const course = await Course.create({ name, image, description });
+    await topicsController.createListOfTopics(topics, course.id);
+
+    const courseObject = await this.getCourseById(course.id);
+    return courseObject;
   }
 
   async listAllCourses() {
