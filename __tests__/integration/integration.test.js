@@ -12,7 +12,7 @@ const db = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-beforeAll(async () => {
+beforeEach(async () => {
   await db.query('DELETE FROM users');
 });
 
@@ -72,6 +72,8 @@ describe('POST /clients/signin', () => {
       email: 'test@test.com',
       password: '123456',
     };
+
+    await db.query('INSERT INTO users (name, email, password, type) values ($1, $2, $3, $4)', [body.name, body.email, body.password, 'CLIENT']);
 
     const response = await agent.post('/clients/signin').send(bodyLogin);
     
