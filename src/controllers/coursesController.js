@@ -30,4 +30,3 @@ class CoursesController {
 }
 
 module.exports = new CoursesController();
-
