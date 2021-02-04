@@ -39,7 +39,7 @@ describe('POST /clients/courses', () => {
         },
       ],
     };
-    const response = await agent.post('/clients/courses').send(body);
+    const response = await agent.post('/admin/courses').send(body);
     expect(response.status).toBe(201);
   });
 
@@ -50,7 +50,7 @@ describe('POST /clients/courses', () => {
       description: 'JavaScript do Zero',
       topics: [],
     };
-    const response = await agent.post('/clients/courses').send(body);
+    const response = await agent.post('/admin/courses').send(body);
 
     expect(response.status).toBe(422);
   });
@@ -71,7 +71,7 @@ describe('POST /clients/courses', () => {
     };
     await db.query('INSERT INTO courses (name, image, description) values ($1, $2, $3)', [body.name, body.image, body.description]);
 
-    const response = await agent.post('/clients/courses').send(body);
+    const response = await agent.post('/admin/courses').send(body);
 
     expect(response.status).toBe(409);
   });
