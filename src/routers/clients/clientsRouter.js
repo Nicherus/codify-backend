@@ -4,7 +4,6 @@ const router = express.Router();
 
 const usersController = require('../../controllers/usersController');
 const clientsMiddlewares = require('../../middlewares/clientsMiddlewares');
-const authMiddleware = require('../../middlewares/authMiddleware');
 
 router.post('/signup', clientsMiddlewares.signUpMiddleware, async (req, res) => {
   await usersController.postSignUp(req.body);
