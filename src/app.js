@@ -21,6 +21,7 @@ app.use('/admin', adminRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
+  console.log(error);
   if (error instanceof ConflictError) return res.status(409).send({ error: 'Conflito de dados.' });
   if (error instanceof InexistingId) return res.status(403).send({ error: 'Id does not exists' });
   if (error instanceof AuthorizationError) return res.status(403).send({ error: 'Não autorizado.' });
