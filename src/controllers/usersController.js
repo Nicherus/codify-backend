@@ -30,9 +30,9 @@ class UsersController {
 
     if (type !== user.type) throw new AuthorizationError();
 
-    const checkPassword = (type === 'CLIENT')?bcrypt.compareSync(password, user.password): password === user.password;
+    const checkPassword = (type === 'CLIENT') ? bcrypt.compareSync(password, user.password) : password === user.password;
     if (checkPassword) {
-      const id = user.id;
+      const { id } = user;
       const token = jwt.sign({ id }, process.env.SECRET, {
         expiresIn: 86400,
       });
