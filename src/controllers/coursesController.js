@@ -1,6 +1,7 @@
 const Course = require('../models/Course');
 const ConflictError = require('../errors/ConflictError');
 const InexistingId = require('../errors/InexistingId');
+const Topic = require('../models/Topic');
 
 class CoursesController {
   async findCourseByName(name) {
@@ -22,7 +23,13 @@ class CoursesController {
   }
 
   async getCourseById(id) {
-    const course = await Course.findOne({ where: { id } });
+    const course = await Course.findOne({
+      where: { id },
+      include: [{
+        model: Topic,
+        attributes: ['id', 'name'],
+      }],
+    });
     if (!course) throw new InexistingId();
 
     return course;

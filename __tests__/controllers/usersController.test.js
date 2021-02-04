@@ -1,9 +1,9 @@
 /* global jest, describe, it, expect */
+const jwt = require('jsonwebtoken');
 const usersController = require('../../src/controllers/usersController');
 const ConflictError = require('../../src/errors/ConflictError');
 const AuthorizationError = require('../../src/errors/AuthorizationError');
 const User = require('../../src/models/User');
-const jwt = require('jsonwebtoken');
 
 jest.mock('bcrypt', () => ({
   hashSync: (password) => password,
@@ -21,17 +21,17 @@ describe('postSignup', () => {
       email: 'test@test.com',
       password: '123456',
     };
-    
+
     const expectedObject = {
       id: 1,
       name: 'test',
       email: 'test@test.com',
       password: '123456',
     };
-    
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => null);
     User.create.mockResolvedValue(expectedObject);
-    
+
     const user = await usersController.postSignUp(body);
 
     expect(user).toBe(expectedObject);
@@ -61,13 +61,13 @@ describe('postSignup', () => {
 describe('findByEmail', () => {
   it('should return the same object', async () => {
     const email = 'test@test.com';
-    
+
     const expectedObject = {
       id: 1, email, name: 'test', password: '123456',
     };
-    
+
     User.findOne.mockResolvedValue(expectedObject);
-    
+
     const user = await usersController.findUserByEmail(email);
     expect(user).toBe(expectedObject);
   });
@@ -75,14 +75,13 @@ describe('findByEmail', () => {
 
 describe('postSignIn', () => {
   it('should return username and auth token for CLIENT', async () => {
-
     const jwtSpy = jest.spyOn(jwt, 'sign');
     jwtSpy.mockReturnValue('token');
 
     const body = {
       email: 'test@test.com',
       password: '123456',
-    }
+    };
 
     const expectedObject = {
       name: 'test',
@@ -94,8 +93,8 @@ describe('postSignIn', () => {
       name: 'test',
       password: '123456',
       type: 'CLIENT',
-    }
-    
+    };
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => userFound);
 
     const user = await usersController.postSignIn(body, 'CLIENT');
@@ -103,14 +102,13 @@ describe('postSignIn', () => {
   });
 
   it('should return username and auth token for ADMIN', async () => {
-
     const jwtSpy = jest.spyOn(jwt, 'sign');
     jwtSpy.mockReturnValue('token');
 
     const body = {
       email: 'test@test.com',
       password: '123456',
-    }
+    };
 
     const expectedObject = {
       name: 'test',
@@ -122,8 +120,8 @@ describe('postSignIn', () => {
       name: 'test',
       password: '123456',
       type: 'ADMIN',
-    }
-    
+    };
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => userFound);
 
     const user = await usersController.postSignIn(body, 'ADMIN');
@@ -131,65 +129,61 @@ describe('postSignIn', () => {
   });
 
   it('should throw authorization error when user type differs from endpoint', async () => {
-
     const jwtSpy = jest.spyOn(jwt, 'sign');
     jwtSpy.mockReturnValue('token');
 
     const body = {
       email: 'test@test.com',
       password: '123456',
-    }
+    };
     const userFound = {
       name: 'test',
       password: '123456',
       type: 'CLIENT',
-    }
-    
+    };
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => userFound);
 
     expect(async () => usersController.postSignIn(body, 'ADMIN')).rejects.toThrow(AuthorizationError);
   });
 
   it('should throw authorization error when password is wrong ADMIN', async () => {
-
     const jwtSpy = jest.spyOn(jwt, 'sign');
     jwtSpy.mockReturnValue('token');
 
     const body = {
       email: 'test@test.com',
       password: 'ZZZZZZZ',
-    }
+    };
 
     const userFound = {
       name: 'test',
       password: '123456',
       type: 'ADMIN',
-    }
-    
+    };
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => userFound);
 
     expect(async () => usersController.postSignIn(body, 'ADMIN')).rejects.toThrow(AuthorizationError);
   });
 
   it('should throw authorization error when password is wrong CLIENT', async () => {
-
     const jwtSpy = jest.spyOn(jwt, 'sign');
     jwtSpy.mockReturnValue('token');
 
     const body = {
       email: 'test@test.com',
       password: '123456',
-    }
+    };
 
     const userFound = {
       name: 'test',
       password: '123456',
       type: 'CLIENT',
-    }
-    
+    };
+
     jest.spyOn(usersController, 'findUserByEmail').mockImplementationOnce(() => userFound);
 
     expect(async () => usersController.postSignIn(body, 'CLIENT')).rejects.toThrow(AuthorizationError);
   });
-  
 });
