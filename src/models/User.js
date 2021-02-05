@@ -28,9 +28,10 @@ User.init(
       allowNull: false,
     },
   },
-{
-  sequelize,
-  modelName: 'user',
-});
+  {
+    sequelize,
+    modelName: 'user',
+  },
+);
 
 module.exports = User;

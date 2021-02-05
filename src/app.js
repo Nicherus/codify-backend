@@ -9,14 +9,12 @@ const AuthorizationError = require('./errors/AuthorizationError');
 
 const app = express();
 const clientsRouter = require('./routers/clients/clientsRouter');
-const clientsCoursesRouter = require('./routers/clients/coursesRouter');
 const adminRouter = require('./routers/admin/adminRouter');
 
 app.use(cors());
 app.use(express.json());
 
 app.use('/clients', clientsRouter);
-app.use('/clients/courses', clientsCoursesRouter);
 app.use('/admin', adminRouter);
 
 // eslint-disable-next-line no-unused-vars
