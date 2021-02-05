@@ -1,5 +1,6 @@
 /* global jest, describe, it, expect, beforeAll, afterAll */
 const dotenv = require('dotenv');
+const bcrypt = require('bcrypt');
 
 dotenv.config();
 const { Pool } = require('pg');
@@ -73,7 +74,7 @@ describe('POST /clients/signin', () => {
       password: '123456',
     };
 
-    await db.query('INSERT INTO users (name, email, password, type) values ($1, $2, $3, $4)', [body.name, body.email, body.password, 'CLIENT']);
+    await db.query('INSERT INTO users (name, email, password, type) values ($1, $2, $3, $4)', ['Test', bodyLogin.email, bcrypt.hashSync(bodyLogin.password, 10), 'CLIENT']);
 
     const response = await agent.post('/clients/signin').send(bodyLogin);
     
