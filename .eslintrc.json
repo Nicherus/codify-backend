@@ -20,10 +20,6 @@
         "quotes": ["error", "single"],
         "keyword-spacing": ["error", { "before": true, "after": true }],
         "space-in-parens": ["error", "never"],
-        "eol-last": ["error", "always"],
-<<<<<<< HEAD
-        "treatUndefinedAsUnspecified": [0, "always"]
-=======
->>>>>>> main
+        "eol-last": ["error", "always"]
     }
 }
