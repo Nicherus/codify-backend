@@ -26,7 +26,7 @@ Course.init({
   description: {
     type: Sequelize.STRING(10000),
     allowNull: false,
-  }
+  },
 },
 {
   sequelize,
